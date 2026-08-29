@@ -1,0 +1,178 @@
+robot_name: "m2_metal"
+pec_rate: 200
+comm_postfix: "sim"
+fsm:
+  sleep:
+    q: [0.0001, 1.306, -2.738, -0.0001, 1.306, -2.738, 0.0001, 1.306, -2.738, -0.0001, 1.306, -2.738]
+    joint_kp: [0.5, 0.5, 0.5]
+    joint_kd: [1, 1, 1]
+    qd_max: [220.0, 220.0, 220.0]
+    base_kp: [0, 0, 100, 200, 250, 50]
+    base_kd: [10, 15, 20, 5, 5, 10]
+  fixed_stand:
+    q: [0.0, 0.74857, -1.4331, 0.0, 0.74857, -1.4331, 0.0, 0.74857, -1.4331, 0.0, 0.74857, -1.4331]
+    joint_kp: [50, 50, 50]
+    joint_kd: [1, 1, 1]
+    qd_max: [220.0, 220.0, 220.0]
+    base_kp: [0, 0, 100, 200, 250, 50]
+    base_kd: [10, 15, 20, 5, 5, 10]
+  move:
+    gait0:
+      freq: 1.7
+      step_height: 0.12
+      stance_phase: 0.6 # For overlapping trot
+      type: "trot"
+    max_vel_cmd: [1.0, 0.8, 2.0]
+    velocity_gain: 0.5
+    angular_velocity_gain: 0.5
+    integral_velocity_gain: 0.02
+    integral_angular_velocity_gain: 0.02
+    use_vel_bias: true
+    vel_bias: [0.05, -0.03, 0.0]
+    ilimit_vel: [0.5, 0.5, 0.5]
+    default_height: 0.32
+    delta_height: 0.002
+    delta_step_height: 0.002
+    joint_kp: [50, 50, 50]
+    joint_kd: [1, 1, 1]
+    # qd_min: [40, 40, 40]
+    qd_min: [220.0, 220.0, 220.0]
+    qd_max: [220.0, 220.0, 220.0]
+    qdd_max: [300, 400, 500]
+    base_kp: [0, 0, 100, 200, 250, 50]
+    base_kd: [10, 15, 20, 5, 5, 10]
+  free_stand:
+    joint_kp: [50, 50, 50]
+    joint_kd: [1, 1, 1]
+    qd_max: [220.0, 220.0, 220.0]
+    base_kp: [0, 0, 100, 200, 250, 50]
+    base_kd: [10, 15, 20, 5, 5, 10]
+controller:
+  type: "wbc"
+  stand_kp: [50, 50, 50]
+  stand_kd: [1, 1, 1]
+  sleep_kp: [0.5, 0.5, 0.5]
+  sleep_kd: [1, 1, 1]
+  move_kp: [50, 50, 50]
+  move_kd: [2.0, 2.0, 2.0]
+  swing_kp: [13.63, 13.63, 27.27]
+  swing_kd: [1.0, 1.0, 1.0]
+  stance_kp: [6, 6, 12]
+  stance_kd: [1.5, 1.5, 1.5]
+  feet_kp: [340.26, 340.26, 180.26]
+  feet_kd: [8.13, 8.13, 10.13]
+  wn2: [0, 0, 5, 400, 800, 100, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]
+  b_max: [20, 20, 250, 50, 50, 10]
+  fz_min: 10
+  fz_max: 150
+  mu: 0.3
+  base_ki: 0.0
+  pitch_bias: 0.0
+  use_foot_impedance: true
+  move_kp: [30.0, 30.0, 30.0]
+  move_kd: [2.2, 2.2, 2.2]
+  jump_kp: [0.0, 0.0, 0.0]
+  jump_kd: [2.0, 2.0, 2.0]
+  x : 0.04
+  k_att : 0
+  kp_imp : [200, 200, 500]
+  kd_imp : [5, 2, 10]
+  qp:
+    S: [1, 2, 5, 80, 80, 10]
+    W: [0.0001, 0.0001, 0.0001]
+    V: [0.01, 0.01, 0.01]
+    solver_type: 2
+  ptc:
+    qdd_max: [300, 400, 500]
+    qd_max: [220.0, 220.0, 220.0]
+    base_orientation:
+      kp: [50, 50, 0]
+      kd: [1, 1, 1]
+    base_position:
+      kp: [0, 0, 10]
+      kd: [10, 10, 3]
+    swing_foot:
+      kp: [50, 50, 50]
+      kd: [1, 1, 1]
+    stance_foot:
+      kp: [10, 10, 10]
+      kd: [2, 2, 2]
+  mpc:
+    rate: 30
+    dt: 0.05
+    t_horizon: 0.25
+    mu: 0.3
+    fz_min: 0
+    fz_max: 150
+    q_weights: [00.00, 00.00, 50, 1600., 1600., 00, 100., 100., 5., 0.1, 0.1, 5.]
+    r_weights: [0.005, 0.005, 0.001, 0.005, 0.005, 0.001, 0.005, 0.005, 0.001, 0.005, 0.005, 0.001]
+    combo: 0
+    caching:
+      enabled: true
+      use_cache_only: false
+      discovery: false
+      feature_delta: 0.1
+      save_cache: false
+      save_every_iters: 5000
+      bin_widths: [0.1, 0.1, 0.2, 0.5, 0.5, 0.5, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
+      max_size: 8192
+  wbc:
+    base_kp: [0, 0, 100, 200, 250, 50]
+    base_kd: [10, 15, 20, 5, 5, 10]
+    swing_kp: [300.26, 300.26, 350.26]
+    swing_kd: [32.13, 32.13, 35.13]
+    torque_limits: [12, 12, 24]
+    mu: 0.3
+    swing_weight: 100.0
+    base_weight: 50.0
+    contact_force_weight: 0.05
+planner:
+  type: "rp"
+  use_adaptive_gait: true
+  use_capture_point_heuristic: false
+  use_terrain_adaptation: true
+  use_vpsp: false
+  use_admittance_control: false
+  use_cbf_obstacle_avoidance: false
+  foot_magic_number: 1.0
+  foot_traj_type: "cycloid"
+  min_gait_freq: 1.6
+  max_gait_freq: 2.0
+  max_body_height: 0.33
+  min_body_height: 0.32
+  max_base_vel_x: 0.75
+  max_base_vel_y: 0.45
+  max_base_vel_z: 0.3
+  max_base_vel_yaw: 3.0
+  max_base_accel_x: 1.0
+  max_base_accel_y: 1.0
+  max_base_accel_z: 1.0
+  max_base_accel_yaw: 2.0
+  max_step_length_x: 0.3
+  max_step_length_y: 0.2
+estimator:
+  type: "ekf"
+  cutoff_freq_imu_accel: 16
+  cutoff_freq_imu_gyro: 16
+  cutoff_freq_encoder_pos: 32
+  cutoff_freq_encoder_vel: 32
+  cutoff_freq_encoder_tau: 32
+  base_wrench_filter_cutoff: 40
+  gmo_cutoff: 50
+  EKF:
+    sigma_pz: 0.5
+    sigma_fz: 0.3
+    sigma_process: 0.1
+    pc_fz_mu: 20
+    pc_fz_sigma: 3.3
+    sensor_noise_zfoot: 0.001
+    sensor_noise_pimu_rel_foot: 0.01
+    sensor_noise_vimu_rel_foot: 0.1
+    process_noise_pimu: 0.02
+    process_noise_vimu: 0.02
+    process_noise_pfoot: 0.02
+    base_vel_filter_cutoff: 40
+    base_lf_vel_filter_cutoff: 10
+    base_pos_filter_cutoff: 5
+    plane_normal_filter_cutoff: 0.5
+    use_terrain_adaptation: true

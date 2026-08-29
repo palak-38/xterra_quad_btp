@@ -1,0 +1,26 @@
+# Payload configuration for MuJoCo simulation and kinodynamics
+# Each entry defines one payload body rigidly attached to the robot base.
+#
+# Fields:
+#   name     : unique body name (used in XML and Pinocchio model)
+#   mass     : payload mass in kg
+#   pos      : [x, y, z] position of payload CoM relative to base origin (m)
+#   inertia  : [Ixx, Iyy, Izz] diagonal inertia tensor (kg·m²)
+#   size     : [sx, sy, sz] MuJoCo box half-extents (m) — full side = 2*size
+#   rgba     : [r, g, b, a] visual color, values 0.0–1.0
+
+payloads:
+  # - name: "box_payload"
+  #   mass: 10.0
+  #   pos: [0.0, 0.0, 0.13246]         
+  #   inertia: [0.00375, 0.00375, 0.00375] 
+  #   size: [0.075, 0.075, 0.075]     
+  #   rgba: [0.8, 0.2, 0.2, 0.8]
+
+  # Example: additional sensor/battery pack
+  # - name: "sensor_pack"
+  #   mass: 5.0
+  #   pos: [0.05, 0.0, 0.105]        
+  #   inertia: [0.000400, 0.000500, 0.000300]
+  #   size: [0.06, 0.04, 0.048]
+  #   rgba: [0.2, 0.2, 0.8, 0.8]
